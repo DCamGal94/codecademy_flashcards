@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addQuiz } from "../quizzes/quizzesSlice";
 
 const topicsSlice = createSlice({
     name: "topics",
@@ -24,6 +25,13 @@ const topicsSlice = createSlice({
                 icon: icon,
                 quizIds: []
             }
+        }
+    },
+    // extraReducers allows createSlice to respond and update its own state in response to other action types besides the types it has generated. From: https://redux-toolkit.js.org/api/createSlice/#extrareducers
+    extraReducers: {
+        [addQuiz.type]: (state, action) => {
+            const { id, topicId } = action.payload;
+            state.topics[topicId].quizIds.push(id);
         }
     }
 });
