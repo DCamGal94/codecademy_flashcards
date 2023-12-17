@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const topicsSlice = createSlice({
+const topicsSlice = createSlice({
     name: "topics",
     // Has initial state consisting of an object that includes one property, topics, which corresponds to an empty object.
     initialState: {
@@ -19,9 +19,9 @@ export const topicsSlice = createSlice({
             const { id, name, icon } = action.payload;
             // Store these values in the state as a new topic object.
             state.topics[id] = {
-                id,
-                name,
-                icon,
+                id: id,
+                name: name,
+                icon: icon,
                 quizIds: []
             }
         }
@@ -29,8 +29,8 @@ export const topicsSlice = createSlice({
 });
 
 // Create a selector that selects the topics object nested within initialState. Export the selector as well as the action creators and reducer that your slice generates
-export const selectTopics = state => state.topics;
-
 export const { addTopic } = topicsSlice.actions;
+
+export const selectTopics = state => state.topics.topics;
 
 export default topicsSlice.reducer;
