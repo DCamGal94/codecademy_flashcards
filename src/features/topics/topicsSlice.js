@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addQuiz } from "../quizzes/quizzesSlice";
 
-const topicsSlice = createSlice({
+export const topicsSlice = createSlice({
     name: "topics",
     // Has initial state consisting of an object that includes one property, topics, which corresponds to an empty object.
     initialState: {
@@ -22,23 +21,21 @@ const topicsSlice = createSlice({
             state.topics[id] = {
                 id: id,
                 name: name,
-                icon: icon,
+                icon,
                 quizIds: []
             }
         }
     },
     // extraReducers allows createSlice to respond and update its own state in response to other action types besides the types it has generated. From: https://redux-toolkit.js.org/api/createSlice/#extrareducers
     extraReducers: {
-        [addQuiz.type]: (state, action) => {
-            const { id, topicId } = action.payload;
+        "quizzes/addQuiz": (state, action) => {
+            const { topicId, id } = action.payload;
             state.topics[topicId].quizIds.push(id);
         }
     }
 });
 
 // Create a selector that selects the topics object nested within initialState. Export the selector as well as the action creators and reducer that your slice generates
-export const { addTopic } = topicsSlice.actions;
-
-export const selectTopics = state => state.topics.topics;
-
+export const { addTopic, addQuizIdForTopic } = topicsSlice.actions;
+export const selectTopics = (state) => state.topics.topics;
 export default topicsSlice.reducer;

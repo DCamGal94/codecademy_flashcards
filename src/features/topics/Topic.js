@@ -7,8 +7,8 @@ import { selectTopics } from "../topics/topicsSlice";
 import { selectQuizzes } from "../quizzes/quizzesSlice";
 
 export default function Topic() {
-  const topics = useSelector(selectTopics);  // replace with selector
-  const quizzes = useSelector(selectQuizzes); // replace with selector
+  const topics = useSelector(selectTopics);
+  const quizzes = useSelector(selectQuizzes);
   const { topicId } = useParams();
   const topic = topics[topicId];
 
